@@ -3,7 +3,7 @@ name: Run pytest and Merge to Prod
 on:
   push:
     branches:
-      - dev
+      - developer
 
 jobs:
   build:
@@ -31,5 +31,5 @@ jobs:
         if: success()
         run: |
           git checkout prod
-          git merge dev
+          git merge developer
           git push origin prod
