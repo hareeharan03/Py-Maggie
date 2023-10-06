@@ -1,0 +1,14 @@
+# Virtual Environment
+v_env/
+
+
+# Instance Folder
+*.log
+
+#pycahce
+*.pyc
+__pycache__/
+
+
+environment_variable.txt
+
