@@ -41,6 +41,11 @@ jobs:
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
         DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
+    - name: Set Git user email and name
+      run: |
+        git config --global user.email "hareeharan1999@gmail.com"
+        git config --global user.name "hareeharan03"
+
     - name: Merge 'development' into 'production' (if tests pass)
       if: success()
       run: |
