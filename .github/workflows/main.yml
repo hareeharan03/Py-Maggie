@@ -47,7 +47,7 @@ jobs:
         git fetch origin production:production  # Fetch the remote 'production' branch
         git checkout production  # Switch to the 'production' branch
         git pull origin production  # Ensure you have the latest changes from the remote branch
-        git merge -X theirs development -m "Merge 'development' into 'production'"  # Merge 'development' into 'production' with 'theirs' merge strategy
+        git merge --allow-unrelated-histories -X theirs development -m "Merge 'development' into 'production'"
         git push origin production  # Push the merged changes to 'production'
 
       env:
