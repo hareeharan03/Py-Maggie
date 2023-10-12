@@ -19,7 +19,3 @@ print(get_database_URL())
 
 
 
-
-import sys
-print(sys.path)
-

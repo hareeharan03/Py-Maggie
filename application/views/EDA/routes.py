@@ -8,6 +8,7 @@ import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 import uuid
 from datetime import datetime
+from application.utils.unique_session import unique_session_id
 
 
 #utils import
@@ -68,8 +69,8 @@ def home():
     try:
         if already_assigned:
             pass
-    except NameError:
-        session['session_id'] = str(uuid.uuid4())
+    except:
+        session['session_id'] = unique_session_id()
         print("-------------------------",session['session_id'])
         session['session_started_timestamp'] = str(datetime.now())
         output_info("Welcome to PyMaggie")
@@ -133,14 +134,20 @@ def explore():
 
     df=getting_csv("root_df")
 
-    #For printing column names
-    df_columns = pd.DataFrame(columns=['Count','Column Name'])
+    # Create an empty DataFrame
+    df_columns = pd.DataFrame(columns=['Count', 'Column Name'])
 
-    # Iterate over the column names and positions using enumerate and append them to df_positions
+    # Initialize an empty list to store data
+    data = []
+
+    # Iterate over the column names and positions using enumerate
     for i, col_name in enumerate(df.columns):
-        df_columns = df_columns.append({'Column Name': col_name, 'Count': int(i+1)}, ignore_index=True)
+        data.append([int(i + 1), col_name])
 
-    html_table = df_columns.to_html(index=False,header="true", table_id="column_initial_table")
+    # Concatenate the data into df_columns
+    df_columns = pd.concat([df_columns, pd.DataFrame(data, columns=['Count', 'Column Name'])], ignore_index=True)
+
+    html_table = df_columns.to_html(index=False, header=True, table_id="column_initial_table")
 
 
     ##global numerical,categorical

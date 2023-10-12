@@ -1,6 +1,8 @@
 from flask import Flask, render_template, Blueprint
 import threading
 
+from application.utils.cache import cache
+
 #utils import
 from application.utils.cache_utils import clear_inactive_cache
 
@@ -18,7 +20,10 @@ def internal_server_error(error):
 
 @handler.before_app_request
 def start_background_thread():
-    print("Started")
-    background_thread = threading.Thread(target=clear_inactive_cache)
-    background_thread.daemon = True
-    background_thread.start()
+    cached_keys = cache.cache._cache.keys()  # Get all cached keys
+    print(cached_keys)
+    if cached_keys:
+        print("Started")
+        background_thread = threading.Thread(target=clear_inactive_cache)
+        background_thread.daemon = True
+        background_thread.start()
