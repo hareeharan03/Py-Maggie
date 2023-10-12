@@ -1,0 +1,59 @@
+name: Merge Development to Production
+
+on:
+  push:
+    branches:
+      - development
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.10.11  # Choose your Python version
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+      env:
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+    - name: Debug Secrets
+      run: |
+        echo "SECRET_KEY: ${{ secrets.SECRET_KEY }}"
+        echo "DATABASE_URL: ${{ secrets.DATABASE_URL }}"
+
+    - name: Pull Latest Changes from 'development'
+      run: |
+        git checkout development
+        git pull origin development
+
+    - name: Run pytest
+      run: pytest
+      env:
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
+    - name: Set Git user email and name
+      run: |
+        git config --global user.email "hareeharan1999@gmail.com"
+        git config --global user.name "hareeharan03"
+
+    - name: Merge 'development' into 'production' (if tests pass)
+      if: success()
+      run: |
+        git fetch origin production:production  # Fetch the remote 'production' branch
+        git checkout production  # Switch to the 'production' branch
+        git pull origin production  # Ensure you have the latest changes from the remote branch
+        git merge --allow-unrelated-histories -X theirs development -m "Merge 'development' into 'production'"
+        git push origin production  # Push the merged changes to 'production'
+
+      env:
+        GITHUB_PAT: ${{ secrets.GH_PAT }}
