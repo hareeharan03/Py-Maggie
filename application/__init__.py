@@ -1,10 +1,15 @@
 from flask import Flask
 from config import SECRET_KEY
 from application.utils.cache import cache
+from dotenv import load_dotenv
+
 
 def create_app():
 
     app = Flask(__name__, static_folder='staticFiles')
+
+    load_dotenv()
+
 
     # Set the Flask app's SECRET_KEY
     app.config['SECRET_KEY'] = SECRET_KEY
