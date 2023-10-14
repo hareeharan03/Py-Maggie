@@ -16,10 +16,15 @@ COPY . .
 # Make port 80 available to the world outside this container
 EXPOSE 80
 
+# Set environment variables from build-time arguments
+ARG SECRET_KEY
+ARG DATABASE_URL
+ARG FLASK_APP
+
 # Set environment variables
 ENV SECRET_KEY=${SECRET_KEY}
 ENV DATABASE_URL=${DATABASE_URL}
 ENV FLASK_APP=${FLASK_APP}
 
 # Run app.py when the container launches
-CMD [ "flask", "run", "--host=0.0.0.0", "--port=5000" ]
+CMD [ "flask", "run", "--host=0.0.0.0", "--port=80" ]

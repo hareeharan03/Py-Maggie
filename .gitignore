@@ -8,6 +8,9 @@ v_env/
 #pycahce
 *.pyc
 __pycache__/
+flask_pipeline_backup/
+.env
+your_passowrd.txt
 
 
 environment_variable.txt

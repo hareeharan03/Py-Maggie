@@ -78,7 +78,6 @@ def preprocessing_process():
     message=get_report_data()
 
     #getting the stored df from database
-    print("the csv is retrived for the preprocessing route")
     df=getting_csv("root_df")
 
     question="do you want treat null values?"
