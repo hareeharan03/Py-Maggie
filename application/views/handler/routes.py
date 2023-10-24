@@ -18,12 +18,12 @@ def internal_server_error(error):
     return render_template('error_page.html', error=error), 500
     
 
-@handler.before_app_request
-def start_background_thread():
-    cached_keys = cache.cache._cache.keys()  # Get all cached keys
-    print(cached_keys)
-    if cached_keys:
-        print("Started")
-        background_thread = threading.Thread(target=clear_inactive_cache)
-        background_thread.daemon = True
-        background_thread.start()
+# @handler.before_app_request
+# def start_background_thread():
+#     cached_keys = cache.cache._cache.keys()  # Get all cached keys
+#     print(cached_keys)
+#     if cached_keys:
+#         print("Started")
+#         background_thread = threading.Thread(target=clear_inactive_cache)
+#         background_thread.daemon = True
+#         background_thread.start()

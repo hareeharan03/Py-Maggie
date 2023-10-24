@@ -91,11 +91,19 @@ header h1 {
   margin-right: 10px;
 }
 
+#suggestion_warn {
+  font-size: 14px !important;
+}
+
 .container {
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   height: 100%;
+  padding-left: 0%;
+  padding-right: 0%;
+  width: 1227px;
+  max-width: 93%;
 }
 
 .row-1 {
@@ -158,7 +166,7 @@ header h1 {
     /* Styles for the right column */
 .right-container {
     width: 41.5%;
-    height: 64.9vh;
+    height: 70.8vh;
     float:right;
     border-radius: 20px;
     color: white;
@@ -173,7 +181,7 @@ header h1 {
 
     /* Styles for the top row of the right column */
     .top-right {
-    height: 40%;
+    height: 50%;
     width: 100%;
     border-radius: 20px;
     background-color: rgba(0, 0, 0, 0.437);
@@ -184,7 +192,7 @@ header h1 {
 
     /* Styles for the bottom row of the right column */
     .bottom-right {
-    height: 68%;
+    height: 50%;
     width: 100%;
     border-radius: 20px;
     background-color: rgba(0, 0, 0, 0.437);
@@ -209,10 +217,6 @@ header h1 {
 
 /* Nested Container */
 
-
-
-
-
 .nested-container-botton-left {
   border-radius: 20px;
   background-color: rgba(0, 0, 0, 0.437);
@@ -225,6 +229,9 @@ header h1 {
   color: white;
   display: flex;
   flex-direction: column;
+  padding: 4px;
+  padding-top: 18px;
+  font-family: 'Ubuntu Mono', monospace;
   
 }
 
@@ -232,7 +239,7 @@ header h1 {
   border-radius: 20px;
   background-color: rgba(0, 0, 0, 0.437);
   width: 96.5%;
-  height: 76.9%;
+  height: 80.9%;
   margin-top:35px;
   margin-left: auto;
   margin-right: auto;
@@ -243,6 +250,8 @@ header h1 {
   text-align: justify;
 
   overflow-y: auto;
+
+  padding: 14px;
   
 }
 
@@ -262,6 +271,8 @@ header h1 {
 
   overflow-x: auto; /* or scroll */
   overflow-y: hidden; /* prevent vertical scrolling */
+
+  padding: 14px;
   
 }
 
@@ -480,4 +491,111 @@ p.welcome_pymaggie_description {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* Apply the 3D effect and background to tables with the 'dataframe' class */
+table.dataframe {
+  background: linear-gradient(135deg, #0a0a0a 10%, #222 80%);
+  border-radius: 10px;
+  /* padding: 20px; */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: white;
+  width: 80%;
+  margin: 0 auto;
+  border-collapse: separate;
+  font-size: 10.9px;
+}
+
+/* Style the table rows and cells (customize these styles as needed) */
+table.dataframe tr {
+  border: 1px solid white; /* Add a white border to table rows */
+  border-spacing: 0;
+}
+
+table.dataframe td, table.dataframe th {
+  padding: 10px; /* Add padding to table cells */
+}
+
+th:first-child {
+  border-radius: 6px 0 0 0;
+}
+
+th:last-child {
+  border-radius: 0 6px 0 0;
+}
+
+th:only-child{
+  border-radius: 6px 6px 0 0;
+}
+
+
+@import url('https://fonts.googleapis.com/css?family=Ubuntu+Mono');
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
+.Toolbar__user {
+  color: #d5d0ce;
+  margin-left: 4px;
+  font-size: 12px;
+  line-height: 14px;
+  margin-bottom: 1px;
+}
+.Terminal__text {
+  color: #ddd;
+}
+
+.Terminal__Prompt {
+  margin-top: 10px;
+  display: flex;
+}
+
+.Prompt__user {
+  color: #87d441;
+}
+.Prompt__location {
+  color: #6d85a9;
+}
+.Prompt__dollar {
+  color: #ddd;
+}
+.Prompt__cursor {
+  height: 17px;
+  width: 8px;
+  background: white;
+  display: block;
+  margin-left: 8px;
+  animation: 2000ms ease infinite alternate blink;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 600px) {
+  .Terminal {
+    max-height: 90%;
+    width: 95%;
+  }
+}
+
+.Terminal__text pre {
+  display: block;
+  padding: 9.5px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.42857143;
+  color: #57e259;
+  word-break: break-all;
+  word-wrap: break-word;
+  background-color: #f4efef00;
+  border: 1px solid #cccccc00;
+  border-radius: 6px;
+  margin-left: -5%;
+  margin-top: -4px;
+  margin-bottom: -32px;
+  overflow: hidden;
 }

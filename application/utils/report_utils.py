@@ -8,6 +8,9 @@ logger = configure_logger()
 #connecting to the database
 output_string_col = connect_to_database()
 
+terminal='''<span class="Prompt__user">cody@ubuntu:</span>
+            <span class="Prompt__location">~</span><span class="Prompt__dollar">$ </span>'''
+
 def output_info(inp, id=None, time=None, output_string_col=output_string_col):
     try:
         # Use _id and _time if provided, otherwise use session values
@@ -25,7 +28,7 @@ def output_info(inp, id=None, time=None, output_string_col=output_string_col):
 
         else:
             # If a matching document exists, append the input string to the existing report data
-            report_data = str(result.get('report_data', '')) + '<br><br>' + str(inp)
+            report_data = str(result.get('report_data', '')) + '<br><br>' + terminal +str(inp)
             output_string_col.update_one({'_id': id, 'started_time': time}, {'$set': {'report_data': report_data}})
 
     except Exception as e:

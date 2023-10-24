@@ -24,6 +24,9 @@ unique_id = unique_session_id()
 
 #     return logger
 
+
+# azure logger---------------------------------------------------------------------------------------------
+
 import os
 from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
 
