@@ -13,9 +13,6 @@ RUN pip install --trusted-host pypi.python.org -r requirements.txt
 # Copy the Flask application code from flask_app_backup/ into the container at /app/
 COPY . .
 
-# Make port 80 available to the world outside this container
-EXPOSE 80
-
 # Set environment variables from build-time arguments
 ARG SECRET_KEY
 ARG DATABASE_URL
