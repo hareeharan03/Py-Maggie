@@ -1,5 +1,6 @@
 import sys
 import os
+from dotenv import load_dotenv
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))  # Adjust the path as needed
 
 from application.utils.cache import cache
@@ -16,6 +17,8 @@ from mongomock import MongoClient
 @pytest.fixture
 def app():
     app = create_app()  # Adjust this according to your app setup
+
+    load_dotenv()
 
     return app
 
