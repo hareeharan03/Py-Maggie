@@ -13,6 +13,11 @@ jobs:
   build:
     runs-on: 'ubuntu-latest'
 
+    env:
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      FLASK_APP: ${{ secrets.FLASK_APP }}
+
     steps:
     - uses: actions/checkout@v2
 
