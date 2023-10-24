@@ -49,3 +49,4 @@ jobs:
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_ce07cfe7fa6c4778890541dc7bb53cf6 }}
         images: 'pymaggie.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_8380c4395cab4f0ab6aaf2a50496f236 }}/pymaggie-container:${{ github.sha }}'
+        
