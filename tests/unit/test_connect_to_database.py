@@ -1,6 +1,7 @@
 import pytest
 from application.utils.database_utils import connect_to_database
 from application.utils.report_utils import output_info
+from application.utils.report_utils import terminal
 
 # Test the database connection
 def test_connect_to_database(mock_database_connection):
@@ -48,7 +49,8 @@ def test_output_info_updating(mock_database_connection):
 
     # Assert that the document exists and contains the updated data
     assert result is not None
-    expected_data = f"{input_data}<br><br>{input_data_2}"
+    expected_data = f'''{input_data}<br><br>{terminal}{input_data_2}'''
+    print("+++++++++++++++++++++++++++++++++++++++++",result.get('report_data'))
     assert result.get('report_data') == expected_data
 
 

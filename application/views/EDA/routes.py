@@ -9,6 +9,7 @@ from sklearn.preprocessing import LabelEncoder
 import uuid
 from datetime import datetime
 from application.utils.unique_session import unique_session_id
+from application.utils.report_utils import terminal
 
 
 #utils import
@@ -73,7 +74,6 @@ def home():
         session['session_id'] = unique_session_id()
         print("-------------------------",session['session_id'])
         session['session_started_timestamp'] = str(datetime.now())
-        output_info("Welcome to PyMaggie")
 
 
     
@@ -178,9 +178,12 @@ def explore():
     html_table_seperate = df_seperate.to_html(index=False,header="true", table_id="column_seperate_table")
 
 
-    current_text_list=[("The shape of the given dataset {}".format(str(df.shape))),("The dataset has {} rows and {} columns".format(df.shape[0], df.shape[1])),
-            (("These are the {} columns present in the dataset".format(str(df.shape[1])))),(html_table),("There are {} categorical columns and {} numerical columns".format(str(len(categorical)),str(len(numerical)))),
-            (html_table_seperate)]
+    current_text_list=[terminal+("The shape of the given dataset {}".format(str(df.shape))),
+                       terminal+("The dataset has {} rows and {} columns".format(df.shape[0], df.shape[1])),
+                       terminal+(("These are the {} columns present in the dataset".format(str(df.shape[1])))),
+                       (html_table),
+                       terminal+("There are {} categorical columns and {} numerical columns".format(str(len(categorical)),str(len(numerical)))),
+                       (html_table_seperate)]
     
     current_text="<br><br>".join(current_text_list)
     

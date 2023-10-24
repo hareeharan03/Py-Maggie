@@ -49,16 +49,16 @@ def view_cache():
 
 def clear_inactive_cache():
     while True:
-        time.sleep(300)  # Sleep for 5 minutes
+        time.sleep(100000)  # Sleep for 5 minutes
         current_time = time.time()
-        logger.info('Currently running the clear_inactive_cache function')
         timestamp = cache.get('timestamp')
-        logger.info('Currently the timestamp is {}'.format(timestamp))
-        if timestamp is not None and current_time - timestamp > 300:
+        print('-----------------------------------------------------',timestamp)
+        if timestamp is not None and current_time - timestamp > 100000:
             logger.info('files stored in cache before clearing the cache data {}'.format(view_cache()))
             cache.clear()
-            session.clear()
+            # session.clear()
             logger.info('files stoed in cache after clearing the cache data {}'.format(view_cache()))
+            print('-----------------------------------------------------',timestamp)
 
 def clear_inactive_cache_immediate():    
     logger.info('Currently running the clear_inactive_cache_immediate and clearing the cache and session')
