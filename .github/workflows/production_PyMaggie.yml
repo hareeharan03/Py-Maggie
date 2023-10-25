@@ -28,21 +28,14 @@ jobs:
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v3
-      with:
-        context: .
-        build-args: |
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          FLASK_APP: ${{ secrets.FLASK_APP }}
-      
+      with:      
         push: true
         tags: pymaggie.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_8380c4395cab4f0ab6aaf2a50496f236 }}/pymaggie-container:${{ github.sha }}
         file: ./Dockerfile
-
-      env:
-        SECRET_KEY: ${{ secrets.SECRET_KEY }}
-        DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        FLASK_APP: ${{ secrets.FLASK_APP }}
+        secrets: |
+          "SECRET_KEY: ${{ secrets.SECRET_KEY }}"
+          "DATABASE_URL: ${{ secrets.DATABASE_URL }}"
+          "FLASK_APP: ${{ secrets.FLASK_APP }}"
 
   deploy:
     runs-on: ubuntu-latest
