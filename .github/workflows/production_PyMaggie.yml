@@ -13,11 +13,6 @@ jobs:
   build:
     runs-on: 'ubuntu-latest'
 
-    env:
-      SECRET_KEY: ${{ secrets.SECRET_KEY }}
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}
-      FLASK_APP: ${{ secrets.FLASK_APP }}
-
     steps:
     - uses: actions/checkout@v2
 
@@ -32,13 +27,9 @@ jobs:
         password: ${{ secrets.AzureAppService_ContainerPassword_4257ac4c3a8f4ed58cb61d7be4744895 }}
 
     - name: Build and push container image to registry
-      uses: docker/build-push-action@v3
-      with:      
-        push: true
-        tags: pymaggie.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_8380c4395cab4f0ab6aaf2a50496f236 }}/pymaggie-container:${{ github.sha }}
-        build-args: SECRET_KEY= ${{ env.SECRET_KEY }},DATABASE_URL= ${{ env.DATABASE_URL }},FLASK_APP= ${{ env.FLASK_APP }}
-        file: ./Dockerfile
-        
+      run: |
+        docker build --build-arg SECRET_KEY=${{ secrets.SECRET_KEY }} --build-arg DATABASE_URL=${{ secrets.DATABASE_URL }} --build-arg FLASK_APP=${{ secrets.FLASK_APP }} -t pymaggie.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_8380c4395cab4f0ab6aaf2a50496f236 }}/pymaggie-container:${{ github.sha }}
+        docker push pymaggie.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_8380c4395cab4f0ab6aaf2a50496f236 }}/pymaggie-container:${{ github.sha }} 
 
   deploy:
     runs-on: ubuntu-latest
