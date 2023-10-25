@@ -32,10 +32,6 @@ jobs:
         push: true
         tags: pymaggie.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_cf8457be39f7461993204f8540780d24 }}/pymaggie/pymaggie-container:${{ github.sha }}
         file: ./Dockerfile
-        build-args:
-          SECRET_KEY=${{ secrets.SECRET_KEY }}
-          DATABASE_URL=${{ secrets.DATABASE_URL }}
-          FLASK_APP='application'
 
   deploy:
     runs-on: ubuntu-latest
