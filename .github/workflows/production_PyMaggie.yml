@@ -32,7 +32,10 @@ jobs:
 
     - name: Build and push container image to registry
       run: |
-        docker build --build-arg SECRET_KEY=${{ secrets.SECRET_KEY }} --build-arg DATABASE_URL=${{ secrets.DATABASE_URL }} --build-arg FLASK_APP=${{ secrets.FLASK_APP }} -t pymaggie.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_8380c4395cab4f0ab6aaf2a50496f236 }}/pymaggie-container:${{ github.sha }}
+        docker build -t pymaggie.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_8380c4395cab4f0ab6aaf2a50496f236 }}/pymaggie-container:${{ github.sha }} \
+         --build-arg SECRET_KEY=${{ secrets.SECRET_KEY }} \
+         --build-arg DATABASE_URL=${{ secrets.DATABASE_URL }} \
+         --build-arg FLASK_APP=${{ secrets.FLASK_APP }} .
         docker push pymaggie.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_8380c4395cab4f0ab6aaf2a50496f236 }}/pymaggie-container:${{ github.sha }} 
 
   deploy:
