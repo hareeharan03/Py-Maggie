@@ -13,6 +13,11 @@ jobs:
   build:
     runs-on: 'ubuntu-latest'
 
+    env:
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      FLASK_APP: ${{ secrets.FLASK_APP }}
+
     steps:
     - uses: actions/checkout@v2
 
@@ -31,11 +36,9 @@ jobs:
       with:      
         push: true
         tags: pymaggie.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_8380c4395cab4f0ab6aaf2a50496f236 }}/pymaggie-container:${{ github.sha }}
+        build-args: SECRET_KEY= ${{ env.SECRET_KEY }},DATABASE_URL= ${{ env.DATABASE_URL }},FLASK_APP= ${{ env.FLASK_APP }}
         file: ./Dockerfile
-        secrets: |
-          "SECRET_KEY: ${{ secrets.SECRET_KEY }}"
-          "DATABASE_URL: ${{ secrets.DATABASE_URL }}"
-          "FLASK_APP: ${{ secrets.FLASK_APP }}"
+        
 
   deploy:
     runs-on: ubuntu-latest
@@ -52,10 +55,5 @@ jobs:
         app-name: 'PyMaggie'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_ce07cfe7fa6c4778890541dc7bb53cf6 }}
-        images: 'pymaggie.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_8380c4395cab4f0ab6aaf2a50496f236 }}/pymaggie-container:${{ github.sha }}'
-      env:
-        SECRET_KEY: ${{ secrets.SECRET_KEY }}
-        DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        FLASK_APP: ${{ secrets.FLASK_APP }}
-      
+        images: 'pymaggie.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_8380c4395cab4f0ab6aaf2a50496f236 }}/pymaggie-container:${{ github.sha }}'     
         
