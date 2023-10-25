@@ -50,7 +50,6 @@ def test_output_info_updating(mock_database_connection):
     # Assert that the document exists and contains the updated data
     assert result is not None
     expected_data = f'''{input_data}<br><br>{terminal}{input_data_2}'''
-    print("+++++++++++++++++++++++++++++++++++++++++",result.get('report_data'))
     assert result.get('report_data') == expected_data
 
 
