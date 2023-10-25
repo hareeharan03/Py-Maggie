@@ -34,6 +34,9 @@ jobs:
         file: ./Dockerfile
         build-args:
           FLASK_APP='application'
+          SECRET_KEY=${{ secrets.SECRET_KEY }}
+          DATABASE_URL=${{ secrets.DATABASE_URL }}
+        
 
   deploy:
     runs-on: ubuntu-latest
